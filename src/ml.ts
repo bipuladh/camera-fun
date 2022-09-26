@@ -7,11 +7,13 @@ import "@tensorflow/tfjs-core";
 import "@tensorflow/tfjs-backend-webgl";
 import * as faceDetection from "@tensorflow-models/face-detection";
 
+const path = () => (window.origin.includes("github") ? "/js-camera-ml/" : "/");
+
 const model = faceDetection.SupportedModels.MediaPipeFaceDetector;
 const detectorConfig: faceDetection.MediaPipeFaceDetectorMediaPipeModelConfig =
   {
     runtime: "mediapipe",
-    solutionPath: "/",
+    solutionPath: path(),
   };
 
 const detector = faceDetection.createDetector(model, detectorConfig);
