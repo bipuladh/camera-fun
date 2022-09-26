@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "./build && ./node_modules/.bin/esbuild index.ts --minify --bundle --outdir=dist",
+    "build": "./build && ./node_modules/.bin/esbuild index.ts --bundle --outdir=dist",
     "dev": "./build && ./node_modules/.bin/esbuild index.ts --tree-shaking=false --bundle --outdir=dist --servedir=dist --serve=3000 --loader:.tflite=file"
   },
   "keywords": [],
