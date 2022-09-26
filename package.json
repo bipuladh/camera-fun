@@ -2,11 +2,22 @@
   "name": "camera-fun",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cp ./index.html ./dist/index.html && ./node_modules/.bin/esbuild index.ts --minify --bundle --outdir=dist",
+    "dev": "cp ./index.html ./dist/index.html && ./node_modules/.bin/esbuild index.ts --bundle --outdir=dist --servedir=dist --serve=3000"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.9",
+    "typescript": "^4.8.3"
+  },
+  "engines": {
+    "node": ">=17.0.0"
+  }
 }
