@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ -d "./dist" ]
+then
+    cp ./index.html ./dist/index.html
+else
+    mkdir ./dist
+    cp ./index.html ./dist/index.html
+fi
+
+cp ./node_modules/@mediapipe/face_detection/face_detection_short.binarypb ./dist/
+cp ./node_modules/@mediapipe/face_detection/face_detection_short_range.tflite ./dist/
+cp ./node_modules/@mediapipe/face_detection/face_detection_solution_simd_wasm_bin.js ./dist/
+cp ./node_modules/@mediapipe/face_detection/face_detection_solution_simd_wasm_bin.wasm ./dist/
