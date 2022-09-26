@@ -1,3 +1,6 @@
+import { getDetector } from "./src/ml";
+import { drawResults } from "./src/util";
+
 const setMediaStream = async (video: HTMLVideoElement) => {
   let stream: MediaStream;
   try {
@@ -44,17 +47,15 @@ const processData = (
   height: number,
   hiddenCanvas: CanvasRenderingContext2D,
   visibleCanvas: CanvasRenderingContext2D,
-  processor?: (data: Uint8ClampedArray) => Uint8ClampedArray
+  processor?: (data: ImageData) => (canvas: CanvasRenderingContext2D) => void
 ) => {
   if (!video) {
     return;
   }
   hiddenCanvas.drawImage(video, 0, 0, width, height);
   const imageData: ImageData = hiddenCanvas.getImageData(0, 0, width, height);
-  let data = imageData.data;
-
   if (processor) {
-    data = processor(data);
+    processor(imageData)(visibleCanvas);
   }
   visibleCanvas.putImageData(imageData, 0, 0);
 
@@ -68,9 +69,21 @@ const processData = (
 document.addEventListener("DOMContentLoaded", async () => {
   const [video, hiddenCanvasCxt, visibleCanvasCxt] = getDomReferences();
   await setMediaStream(video);
+  const detector = await getDetector();
+  const processor = (imageData) => async (canvas) => {
+    const faces = await detector.estimateFaces(imageData);
+    drawResults(visibleCanvasCxt, faces, true, true);
+  };
   registerListener(video, () => {
     const height = video.videoHeight;
     const width = video.videoWidth;
-    processData(video, width, height, hiddenCanvasCxt, visibleCanvasCxt);
+    processData(
+      video,
+      width,
+      height,
+      hiddenCanvasCxt,
+      visibleCanvasCxt,
+      processor
+    );
   });
 });

@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "cp ./index.html ./dist/index.html && ./node_modules/.bin/esbuild index.ts --minify --bundle --outdir=dist",
-    "dev": "cp ./index.html ./dist/index.html && ./node_modules/.bin/esbuild index.ts --bundle --outdir=dist --servedir=dist --serve=3000"
+    "build": "./build && ./node_modules/.bin/esbuild index.ts --minify --bundle --outdir=dist",
+    "dev": "./build && ./node_modules/.bin/esbuild index.ts --tree-shaking=false --bundle --outdir=dist --servedir=dist --serve=3000 --loader:.tflite=file"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "http-server": "^14.1.1"
+    "@mediapipe/face_detection": "^0.4.1646425229",
+    "@tensorflow-models/face-detection": "^1.0.1",
+    "@tensorflow/tfjs-backend-webgl": "^3.20.0",
+    "@tensorflow/tfjs-converter": "^3.20.0",
+    "@tensorflow/tfjs-core": "^3.20.0"
   },
   "devDependencies": {
     "esbuild": "^0.15.9",
@@ -19,5 +23,6 @@
   },
   "engines": {
     "node": ">=17.0.0"
-  }
+  },
+  "sideEffects": true
 }
