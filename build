@@ -1,6 +1,8 @@
 #!/bin/bash
 if [ -d "./dist" ]
 then
+    rm -fdr dist
+    mkdir ./dist
     cp ./index.html ./dist/index.html
 else
     mkdir ./dist
