@@ -1,9 +1,6 @@
-/* @__PURE__ */
 import "@mediapipe/face_detection";
-/* @__PURE__ */
 import "@tensorflow/tfjs-core";
 // Register WebGL backend.
-/* @__PURE__ */
 import "@tensorflow/tfjs-backend-webgl";
 import * as faceDetection from "@tensorflow-models/face-detection";
 

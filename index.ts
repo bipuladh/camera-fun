@@ -71,8 +71,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   await setMediaStream(video);
   const detector = await getDetector();
   const processor = (imageData) => async (canvas) => {
-    const faces = await detector.estimateFaces(imageData);
-    drawResults(visibleCanvasCxt, faces, true, true);
+    try {
+      const faces = await detector.estimateFaces(imageData);
+      drawResults(canvas, faces, true, true);
+    } catch (e) {
+      detector.dispose();
+    }
   };
   registerListener(video, () => {
     const height = video.videoHeight;
@@ -86,4 +90,5 @@ document.addEventListener("DOMContentLoaded", async () => {
       processor
     );
   });
+  video.addEventListener("abort", () => detector.dispose());
 });

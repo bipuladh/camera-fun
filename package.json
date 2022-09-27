@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "./build && ./node_modules/.bin/esbuild index.ts --bundle --splitting --format=esm --outdir=dist",
-    "dev": "./build && ./node_modules/.bin/esbuild index.ts --tree-shaking=false --bundle --outdir=dist --servedir=dist --serve=3000 --loader:.tflite=file"
+    "build": "./build && ./node_modules/.bin/esbuild index.ts --bundle --splitting --format=esm --minify --target=es6 --tree-shaking=true --outdir=dist",
+    "dev": "./build && ./node_modules/.bin/esbuild index.ts --minify --target=es6 --sourcemap --bundle --tree-shaking=true --outdir=dist --servedir=dist --serve=3000 --loader:.tflite=file"
   },
   "keywords": [],
   "author": "",
