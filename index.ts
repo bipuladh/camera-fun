@@ -66,7 +66,7 @@ const processData = (
   );
 };
 
-document.addEventListener("DOMContentLoaded", async () => {
+window.onload = async () => {
   const [video, hiddenCanvasCxt, visibleCanvasCxt] = getDomReferences();
   await setMediaStream(video);
   const detector = await getDetector();
@@ -91,4 +91,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
   });
   video.addEventListener("abort", () => detector.dispose());
-});
+};
